@@ -16,9 +16,12 @@ import time
 start_time = time.time()
 
 list_of_primes = []
-newlist = []
+dels = []
 count = 0
-flag = 0
+foundx = 0
+flag2 = 0
+temp = 0
+list_of_fine = []
 
 def is_prime(num):
     d = 2
@@ -26,44 +29,57 @@ def is_prime(num):
        d += 1
     return d * d > num
 
-def find_prime(num):
-    for x in list_of_primes:
-        if num % x == 0:
-            return(x)
-    return(False)
-
-for x in range(2, 100000):
+for x in range(2, 1000):
     if is_prime(x):
         list_of_primes.append(x)
 
-print(list_of_primes)
+# print(list_of_primes)
 
-for x in range(1, 100000):
-    temp = []
-    count = 0
-    m = x
-    while count < 4:
-        if find_prime(x):
-            y = find_prime(x)
-            x = int(x/y)
-            count += 1
-            temp.append(y)
-        else:
+for x in range(1, 10000000):
+    foundx = 0
+    for a in list_of_primes:
+        if a > int(x / 210) or foundx == 1:
             break
-    if count == 4:
-        newlist = []
-        for i in temp:
-            if i not in newlist:
-                newlist.append(i)
+        for b in list_of_primes:
+            if b > int(x / a) or foundx == 1:
+                break
+            for c in list_of_primes:
+                if c > int(x / (2*a*b)) or foundx == 1:
+                    break
+                for d in list_of_primes:
+                    if d > int(x / (a*b*c)) or foundx == 1:
+                        break
+                    if x == a*b*c*d or x == a**2*b*c*d or x == a*b**2*c*d or x==a*b*c**2*d or x==a*b*c*d**2:
+                        if len(dels) == 1:
+                            print(f'{x} = {a} * {b} * {c} * {d}. ')
+                            list_of_fine.append(string)
+                            if f'{x} = {a} * {b} * {c} * {d}' not in list_of_fine:
+                                list_of_fine.append(f'{x} = {a} * {b} * {c} * {d}')
+                            tmp_list_of_delit = [a, b, c, d]
+                            if sorted(tmp_list_of_delit) not in dels:
+                                dels.append(sorted(tmp_list_of_delit))
+                            print(dels, list_of_fine)
 
-        newlist.sort()
-        # print(newlist)
-        if len(newlist) == 4:
-            flag += 1
-        else:
-            flag = 0
-        if flag == 4:
-            print(m, newlist, count, flag)
+                        # if len(dels) == 2:
+                        #     if f'{x} = {a} * {b} * {c}' not in list_of_fine:
+                        #         list_of_fine.append(f'{x} = {a} * {b} * {c}')
+                        #     tmp_list_of_delit = [a, b, c]
+                        #     if sorted(tmp_list_of_delit) not in dels:
+                        #         dels.append(sorted(tmp_list_of_delit))
+                        #     continue
+                        # if len(dels) == 2:
+                        #     print(dels, list_of_fine)
+                        #     continue
+
+                        string = f'{x} = {a} * {b} * {c} * {d}'
+                        tmp_list_of_delit = [a,b,c,d]
+                        dels.append(sorted(tmp_list_of_delit))
+                        foundx = 1
+                    # else:
+                        # dels = []
+                        # list_of_fine = []
+                        # foundx = 0
+
 
 print("--- %s seconds ---" % (time.time() - start_time))
 # input()

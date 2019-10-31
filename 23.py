@@ -10,9 +10,7 @@ Find the sum of all the positive integers which cannot be written as the sum of 
 import time
 start_time = time.time()
 
-count = 0
-num = 0
-int_is_sum_of_abundant_numbers = []
+summa = 0
 # f = open('d:\coding\Python\Euler\p023_numbers.txt', 'w')
 #
 # list_of_abundant_numbers = []
@@ -36,31 +34,28 @@ with open('d:\coding\Python\Euler\p023_numbers.txt') as f:
     numbers = f.readline()
 f.close()
 
+
 numbers = numbers.split(", ")
 for x in range(0, len(numbers)):
     numbers[x] = int(numbers[x])
 
-# my_set = set(numbers)
-# print(numbers)
-# print(my_set)
 
-def my_func(numbers, z):
-    for index, item in enumerate(numbers):
-        if item > z:
-            return index, item
-
-for z in range(1, 281):
-# for z in range(1, 28124):
-    a, b = my_func(numbers, z)
-    for x in range(1, a+2):
-        for y in range(1, a):
-            num = numbers[x]+ numbers[y]
-            print(z, x, y, int_is_sum_of_abundant_numbers)
-            if not num in int_is_sum_of_abundant_numbers:
-                int_is_sum_of_abundant_numbers.append(z)
-
-print(sum(int_is_sum_of_abundant_numbers))
-
+for x in range(0, 28123):
+    flag = 1
+    for y in numbers:
+        temp = x-y
+        if temp < 0:
+            break
+        if temp in numbers:
+            flag = 0
+    if flag == 1:
+        summa += x
+        # print(x)
+    if x % 100 == 1:
+        print(x)
+        print("--- %s seconds ---" % (time.time() - start_time))
+        start_time = time.time()
+print(summa)
 
 
 print("--- %s seconds ---" % (time.time() - start_time))
