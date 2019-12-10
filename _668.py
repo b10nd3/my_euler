@@ -16,31 +16,29 @@ def is_prime(num):
     return d * d > num
 
 
-list_of_primes = []
+list_of_primes = set()
 count = 1
 flag = 0
+temp = 0
 for x in range(1, int(math.sqrt(10000000000))):
+# for x in range(1, int(math.sqrt(10000))):
     if is_prime(x):
-        list_of_primes.append(x)
-# print(len(list_of_primes), list_of_primes)
-
+        list_of_primes.add(x)
+list_of_primes = sorted(list_of_primes)
+print("Set of primes completed")
 
 # for num in range(1, int(math.sqrt(10000000000))):
 # for num in range(1, 10000000001):
 for num in range(1, 101):
     sqroot = math.sqrt(num)
-    sqroot1 = math.sqrt(num)
     for y in list_of_primes:
-        if y > num and y < sqroot1:
-            break
         if num % y == 0 and y >= sqroot:
             flag = 1
     if flag == 0:
         count += 1
+        # print(count, num, sqroot, temp)
     flag = 0
 print(count)
-
-
 
 
 #
